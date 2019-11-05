@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TestModelStoreContainer" CdmEntityContainer="TestDBEntities1">
+    <EntitySetMapping Name="bookings">
+      <EntityTypeMapping TypeName="TestModel.booking">
+        <MappingFragment StoreEntitySet="bookings">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_good" ColumnName="id_good" />
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+          <ScalarProperty Name="id_manager" ColumnName="id_manager" />
+          <ScalarProperty Name="cnt" ColumnName="cnt" />
+          <ScalarProperty Name="total" ColumnName="total" />
+          <ScalarProperty Name="cdate" ColumnName="cdate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="goods">
+      <EntityTypeMapping TypeName="TestModel.good">
+        <MappingFragment StoreEntitySet="goods">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="article" ColumnName="article" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="cdate" ColumnName="cdate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="TestModel.user">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="role" ColumnName="role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

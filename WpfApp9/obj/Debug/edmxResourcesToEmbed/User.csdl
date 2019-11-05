@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="booking">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_good" Type="Int32" />
+    <Property Name="id_user" Type="Int32" />
+    <Property Name="id_manager" Type="Int32" />
+    <Property Name="cnt" Type="Int32" />
+    <Property Name="total" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="cdate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="good" Relationship="Self.FK__bookings__cdate__4BAC3F29" FromRole="bookings" ToRole="goods" />
+    <NavigationProperty Name="user" Relationship="Self.FK__bookings__id_man__4D94879B" FromRole="bookings" ToRole="users" />
+    <NavigationProperty Name="user1" Relationship="Self.FK__bookings__id_use__4CA06362" FromRole="bookings" ToRole="users" />
+  </EntityType>
+  <EntityType Name="good">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="article" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="cdate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="bookings" Relationship="Self.FK__bookings__cdate__4BAC3F29" FromRole="goods" ToRole="bookings" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="login" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="role" Type="Byte" />
+    <NavigationProperty Name="bookings" Relationship="Self.FK__bookings__id_man__4D94879B" FromRole="users" ToRole="bookings" />
+    <NavigationProperty Name="bookings1" Relationship="Self.FK__bookings__id_use__4CA06362" FromRole="users" ToRole="bookings" />
+  </EntityType>
+  <Association Name="FK__bookings__cdate__4BAC3F29">
+    <End Role="goods" Type="Self.good" Multiplicity="0..1" />
+    <End Role="bookings" Type="Self.booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="goods">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="bookings">
+        <PropertyRef Name="id_good" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__bookings__id_man__4D94879B">
+    <End Role="users" Type="Self.user" Multiplicity="0..1" />
+    <End Role="bookings" Type="Self.booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="bookings">
+        <PropertyRef Name="id_manager" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__bookings__id_use__4CA06362">
+    <End Role="users" Type="Self.user" Multiplicity="0..1" />
+    <End Role="bookings" Type="Self.booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="bookings">
+        <PropertyRef Name="id_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TestDBEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="bookings" EntityType="Self.booking" />
+    <EntitySet Name="goods" EntityType="Self.good" />
+    <EntitySet Name="users" EntityType="Self.user" />
+    <AssociationSet Name="FK__bookings__cdate__4BAC3F29" Association="Self.FK__bookings__cdate__4BAC3F29">
+      <End Role="goods" EntitySet="goods" />
+      <End Role="bookings" EntitySet="bookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__bookings__id_man__4D94879B" Association="Self.FK__bookings__id_man__4D94879B">
+      <End Role="users" EntitySet="users" />
+      <End Role="bookings" EntitySet="bookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__bookings__id_use__4CA06362" Association="Self.FK__bookings__id_use__4CA06362">
+      <End Role="users" EntitySet="users" />
+      <End Role="bookings" EntitySet="bookings" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

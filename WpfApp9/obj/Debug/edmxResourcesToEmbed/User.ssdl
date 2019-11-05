@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="bookings">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_good" Type="int" />
+    <Property Name="id_user" Type="int" />
+    <Property Name="id_manager" Type="int" />
+    <Property Name="cnt" Type="int" />
+    <Property Name="total" Type="money" />
+    <Property Name="cdate" Type="date" />
+  </EntityType>
+  <EntityType Name="goods">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="article" Type="varchar" MaxLength="100" />
+    <Property Name="name" Type="varchar" MaxLength="100" />
+    <Property Name="price" Type="money" />
+    <Property Name="cdate" Type="date" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="login" Type="varchar" MaxLength="100" />
+    <Property Name="password" Type="varchar" MaxLength="100" />
+    <Property Name="role" Type="tinyint" />
+  </EntityType>
+  <Association Name="FK__bookings__cdate__4BAC3F29">
+    <End Role="goods" Type="Self.goods" Multiplicity="0..1" />
+    <End Role="bookings" Type="Self.bookings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="goods">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="bookings">
+        <PropertyRef Name="id_good" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__bookings__id_man__4D94879B">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="bookings" Type="Self.bookings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="bookings">
+        <PropertyRef Name="id_manager" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__bookings__id_use__4CA06362">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="bookings" Type="Self.bookings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="bookings">
+        <PropertyRef Name="id_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TestModelStoreContainer">
+    <EntitySet Name="bookings" EntityType="Self.bookings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="goods" EntityType="Self.goods" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__bookings__cdate__4BAC3F29" Association="Self.FK__bookings__cdate__4BAC3F29">
+      <End Role="goods" EntitySet="goods" />
+      <End Role="bookings" EntitySet="bookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__bookings__id_man__4D94879B" Association="Self.FK__bookings__id_man__4D94879B">
+      <End Role="users" EntitySet="users" />
+      <End Role="bookings" EntitySet="bookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__bookings__id_use__4CA06362" Association="Self.FK__bookings__id_use__4CA06362">
+      <End Role="users" EntitySet="users" />
+      <End Role="bookings" EntitySet="bookings" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
